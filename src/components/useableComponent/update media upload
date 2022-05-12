@@ -1,0 +1,105 @@
+<WrapItem>
+                  <Box bg={"white"} borderRadius="lg" width={"80"}>
+                    <Box m={8} color="#0B0E3F">
+                      <Text fontSize={"25"}>Upload Media </Text> <Divider />
+                      <VStack spacing={5}>
+                        {/* <FormLabel>Media Title:</FormLabel> */}
+
+                        {/* thumbnail start */}
+                        <InputGroup borderColor={"#E0E1E7"} mb="3">
+                          <Input
+                            ref={thumbRef}
+                            onChange={thumbFtn}
+                            display="none"
+                            type="file"
+                            size={"md"}
+                            placeholder="Media thumbnail here !!!"
+                            textAlign={"center"}
+                          />
+                        </InputGroup>
+                        <Button
+                          onClick={refThumb}
+                          width="full"
+                          colorScheme={"facebook"}
+                        >
+                          {" "}
+                          Thumbnail
+                        </Button>
+                        {imageStore === "" ? (
+                          ""
+                        ) : (
+                          <Image
+                            src={URL.createObjectURL(imageStore)}
+                            boxSize="160"
+                            borderRadius={"80"}
+                          />
+                        )}
+                        {/* thumbnail end */}
+
+                        {/* start preview video */}
+                        <InputGroup borderColor={"#E0E1E7"} mb="3">
+                          <Input
+                            ref={preRef}
+                            onChange={preFtn}
+                            display="none"
+                            type="file"
+                            size={"md"}
+                            placeholder="Media preview video here !!!"
+                            textAlign={"center"}
+                          />
+                        </InputGroup>
+                        <Button
+                          onClick={refPre}
+                          width="full"
+                          colorScheme={"facebook"}
+                        >
+                          Preview Video
+                        </Button>
+
+                        {preVideo === "" ? (
+                          ""
+                        ) : (
+                          <video
+                            controls
+                            src={URL.createObjectURL(preVideo)}
+                            title="Preview video"
+                          />
+                        )}
+
+                        {/* end preview video */}
+
+                        {/* start actual video */}
+
+                        <InputGroup borderColor={"#E0E1E7"} mb="3">
+                          <Input
+                            ref={actRef}
+                            onChange={actFtn}
+                            display="none"
+                            type="file"
+                            size={"md"}
+                            placeholder="Media Original video here !!!"
+                            textAlign={"center"}
+                          />
+                        </InputGroup>
+                        <Button
+                          onClick={refAct}
+                          width="full"
+                          colorScheme={"facebook"}
+                        >
+                          Original Video
+                        </Button>
+                        {actVideo === "" ? (
+                          ""
+                        ) : (
+                          <video
+                            controls
+                            src={URL.createObjectURL(actVideo)}
+                            title="Original video"
+                          />
+                        )}
+
+                        {/* end actual video */}
+                      </VStack>
+                    </Box>
+                  </Box>
+                </WrapItem>
