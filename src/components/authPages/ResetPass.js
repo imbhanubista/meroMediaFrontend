@@ -12,7 +12,7 @@ const ResetPass = () => {
   // for email
   const location = useLocation()
   let query = new URLSearchParams(location.search)
-  console.log(query,"Hello here")
+  // console.log(query,"Hello here")
 
     // password section handle
     const [show, setShow] = React.useState(false);

@@ -31,17 +31,27 @@ import {
   ChevronRightIcon,
   Search2Icon,
 } from "@chakra-ui/icons";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import {FiChevronDown} from 'react-icons/fi'
 import { useSelector } from "react-redux";
 import AdminUserNav from "./AdminUserNav";
 import { Link as RouterLink } from "react-router-dom";
+import { useState } from "react";
 
 export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure();
   const singnNav = useNavigate();
   const selector = useSelector((state) => state.reducer);
   // console.log(selector);
+  // search data
+  const [dataToSearch, setDataToSearch] = useState("");
+  const handleSearch = (e) => {
+    setDataToSearch(e.target.value);
+  };
+  const searchApiData = () => {
+    singnNav("/search?search_query=" + dataToSearch);
+  };
+
   return (
     <Box>
       <Flex
@@ -129,8 +139,9 @@ export default function WithSubnavigation() {
                 bg="whatsapp"
                 placeholder="search media ..."
                 textAlign={"center"}
+                onChange={handleSearch}
               />
-              <Button variant={"outline"} size="md">
+              <Button variant={"outline"} onClick={searchApiData} size="md">
                 {" "}
                 <Search2Icon />{" "}
               </Button>

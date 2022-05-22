@@ -195,10 +195,11 @@ export const mediaDetail = async (id) => {
 };
 
 // to purchase media
-export const mediaPurchase = async (id) => {
+export const mediaPurchase = async (id,token) => {
   let response = await authenticatedApi(
     apiUrls.admin.purchaseMd.method,
-    apiUrls.admin.purchaseMd.url + id
+    apiUrls.admin.purchaseMd.url + id,
+    token
   );
   return response;
 };
@@ -226,6 +227,16 @@ export const getDetailPurchase = async (id) => {
   let response = await authenticatedApi(
     apiUrls.admin.purchaseDetail.method,
     apiUrls.admin.purchaseDetail.url + id
+  );
+  return response;
+};
+
+// for search
+export const getSearchData = async (data) => {
+  let response = await authenticatedApi(
+    apiUrls.admin.searchApi.method,
+    apiUrls.admin.searchApi.url,
+    data
   );
   return response;
 };

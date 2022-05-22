@@ -47,6 +47,7 @@ const TotalPurchase = lazy(() =>
 const PurchaseMediaDetailsComponent = lazy(() =>
   import("../components/users/PurchaseMediaDetailsComponent")
 );
+const SearchData = lazy(() => import("../components/users/SearchData"));
 const Routing = () => {
   const selector = useSelector((state) => state.reducer);
   const isLoggedIn = Object.keys(selector).length > 0;
@@ -204,6 +205,15 @@ const Routing = () => {
             }
           />
           <Route path="/detail/:id" element={<DetailMedia />} />
+          <Route
+            path="/search"
+            element={
+              <PrivateRoute isLoggedIn={isLoggedIn}>
+                {" "}
+                <SearchData />{" "}
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </Suspense>

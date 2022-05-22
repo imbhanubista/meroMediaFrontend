@@ -102,6 +102,10 @@ const apiUrls = {
       method: "get",
       url: "user/purchased_detail/",
     },
+    searchApi :{
+      method:"post",
+      url: "/user/search"
+    }
   },
 };
 // 1

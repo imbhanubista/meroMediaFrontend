@@ -24,11 +24,13 @@ import { mediaDetail, mediaPurchase } from "../../services/apiServices";
 import { baseUrl } from "../../services/apis.helper";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import StripeChekout from "react-stripe-checkout";
 
 const DetailMedia = () => {
   const navigateRoute = useNavigate();
   // to get media id
   const { id } = useParams();
+
 
   // state to save data
   const [mediaData, setMediaData] = useState([]);
@@ -51,16 +53,21 @@ const DetailMedia = () => {
     detailMediaApi();
   }, []);
 
+  // to handle payment stripe
+  const handleToken = (token)=>{
+    purchaseHandler(token.id)
+    console.log(token.id);
+}
   // to check whether the user is logged in for purchase or not
   const selector = useSelector((state) => state.reducer);
 
-  const purchaseHandler = async (id) => {
+  const purchaseHandler = async (token) => {
     if (selector.length < 1) {
       toast.error("You must have to login to purchase media", {
         position: toast.POSITION.TOP_CENTER,
       });
     } else {
-      let purchaseApi = await mediaPurchase(id);
+      let purchaseApi = await mediaPurchase(id,{token});
       if (purchaseApi.type === "error") {
         toast.error(purchaseApi.msg, {
           position: toast.POSITION.TOP_RIGHT,
@@ -74,6 +81,7 @@ const DetailMedia = () => {
     }
   };
 
+
   return (
     <>
       <Nav />
@@ -86,7 +94,7 @@ const DetailMedia = () => {
         <>
           {mediaData.map((data, index) => {
             return (
-              <Container maxW={"7xl"} key="index">
+              <Container maxW={"7xl"} key={index}>
                 <VStack
                   columns={{ base: 1, lg: 2 }}
                   spacing={{ base: 2, md: 4 }}
@@ -144,25 +152,26 @@ const DetailMedia = () => {
                         {data.description}
                       </Text>
                     </Box>
-                    {/* <Stack
-                      spacing={{ base: 2, sm: 4 }}
-                      direction={"column"}
-                      divider={
-                        <StackDivider
-                        
-                        // borderColor={useColorModeValue("gray.200", "gray.600")}
-                        />
-                      }
-                    >
-                      <VStack spacing={{ base: "4", sm: "6" }}>
-                      
-                      </VStack> */}
-                    <Button
+                  
+                    
+                    <StripeChekout stripeKey="pk_test_51KwlUKFw2qMNC4dzcgAJ1cmPCwB6NJeTLh0deeiN3bxEug3VEgG159IHFyxGIGxFWjAIuHQDeaPqjIbbKu1N16nu00VxA3BVW1"
+      token={handleToken}
+      name="Mero Media"
+      description="Payment gateway to purchase media!"
+      ComponentClass="div"
+      amount={data.price *100}
+      // shippingAddress
+      // billingAddress= {false}
+      allowRememberMe = {true}
+      >
+       <Button
                       colorScheme={"telegram"}
-                      onClick={() => purchaseHandler(data._id)}
+                      // onClick={() => purchaseHandler(data._id)}
                     >
                       Purchase
-                    </Button>
+                    </Button>   
+          </StripeChekout>
+                   
                     {/* </Stack> */}
                   </Stack>
                 </VStack>
