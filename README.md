@@ -1,7 +1,16 @@
 ## Simple Media Frontend
 
 ## Technology Used
-- React -Routing with react-router-dom -Redux with Redux Persist -API calling with axios -REST API implementation -Chakra UI and it's component.
+- React 
+-Routing with react-router-dom 
+-Redux with Redux Persist 
+-API calling with axios 
+-REST API implementation 
+-Chakra UI and it's component 
+-React-toastify
 
 ## Lesson learned 
--Implementation of redux in real world project -Private routing -Authentication and Unauthentication API calling more on API calling. -CRUD operation
+-Implementation of redux in real world project 
+-Private routing 
+-Authentication and Unauthentication API calling more on API calling 
+-CRUD operation
